@@ -4,6 +4,7 @@
 node_modules
 
 .cache
+.parcel-cache
 
 # testing
 coverage

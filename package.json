@@ -23,8 +23,8 @@
     "dist"
   ],
   "scripts": {
-    "start": "parcel ./examples/parcel-typescript/index.html --open",
-    "build": "rimraf dist tsc --module commonjs && rollup -c rollup.config.ts",
+    "start:examples": "parcel --out-dir .parcel-cache ./examples/parcel-typescript/index.html --open",
+    "build": "rimraf dist tsc --module commonjs && rollup -c rollup.config.js",
     "test": "jest",
     "lint:prod": "tslint -c config/tslint.production.json 'src/**/*.{ts,tsx}'"
   },
