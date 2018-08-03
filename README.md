@@ -49,6 +49,9 @@ export const MyForm = () => (
 );
 ```
 
+* [TypeScript-example on CodeSandbox](https://codesandbox.io/s/p2pzokv1mq)
+* [React-JSX example on CodeSandbox](https://codesandbox.io/s/2pjyoqoolr)
+
 ## Table of Contents
 
 - [`<FormikFields>`-API](#formikfields-api)
