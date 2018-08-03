@@ -1,10 +1,10 @@
-import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
+import filesize from 'rollup-plugin-filesize';
+import json from 'rollup-plugin-json';
+import resolve from 'rollup-plugin-node-resolve';
 import sourceMaps from 'rollup-plugin-sourcemaps';
 import typescript from 'rollup-plugin-typescript2';
 import { uglify } from 'rollup-plugin-uglify';
-import filesize from 'rollup-plugin-filesize';
-import json from 'rollup-plugin-json';
 import pkg from './package.json';
 
 const input = 'src/index.ts';
