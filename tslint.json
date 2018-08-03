@@ -1,0 +1,14 @@
+{
+  "extends": ["./configs/tslint.base.json"],
+  "rules": {
+    "no-any": {
+      "severity": "warning"
+    },
+    "no-console": {
+      "severity": "warning"
+    },
+    "prefer-type-cast": {
+      "severity": "warning"
+    }
+  }
+}

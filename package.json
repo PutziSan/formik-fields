@@ -1,0 +1,72 @@
+{
+  "name": "formik-fields",
+  "description": "An extension to the great formik-library",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "Putzi San <putzisan@putzisan.de>",
+  "repository": "PutziSan/formik-fields",
+  "keywords": [
+    "formik-fields",
+    "FormikFields",
+    "formik",
+    "react",
+    "form",
+    "validation",
+    "field-validation",
+    "forms",
+    "render-prop"
+  ],
+  "main": "dist/formik-fields.cjs.js",
+  "module": "dist/formik-fields.esm.js",
+  "typings": "dist/types/formik-fields.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "parcel ./examples/parcel-typescript/index.html --open",
+    "build": "rimraf dist tsc --module commonjs && rollup -c rollup.config.ts",
+    "test": "jest",
+    "lint:prod": "tslint -c config/tslint.production.json 'src/**/*.{ts,tsx}'"
+  },
+  "peerDependencies": {
+    "formik": "1.x",
+    "react": "16.x"
+  },
+  "dependencies": {
+    "memoize-one": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/enzyme": "^3.1.12",
+    "@types/jest": "^23.1.4",
+    "@types/memoize-one": "^3.1.1",
+    "@types/react": "^16.4.6",
+    "@types/react-dom": "^16.0.6",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "formik": "^1.0.2",
+    "husky": "^1.0.0-rc.12",
+    "jest": "^23.3.0",
+    "jest-environment-enzyme": "^6.0.2",
+    "jest-enzyme": "^6.0.2",
+    "parcel-bundler": "^1.9.4",
+    "prettier": "^1.13.7",
+    "pretty-quick": "^1.6.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.63.5",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-commonjs": "^9.1.4",
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "rollup-plugin-typescript2": "^0.16.1",
+    "rollup-plugin-json": "^3.0.0",
+    "rollup-plugin-uglify": "^4.0.0",
+    "rollup-plugin-filesize": "^4.0.1",
+    "ts-jest": "^23.0.0",
+    "tslint": "^5.10.0",
+    "tslint-config-prettier": "^1.13.0",
+    "tslint-microsoft-contrib": "^5.0.3",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.0.1"
+  }
+}
