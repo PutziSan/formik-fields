@@ -13,9 +13,16 @@
     "@babel/preset-typescript"
   ],
   "plugins": [
-    ["@babel/plugin-proposal-class-properties", { "loose": true }]
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
+    ["@babel/plugin-transform-runtime", { "useESModules": true }]
   ],
   "env": {
+    "commonjs": {
+      "plugins": [
+        ["@babel/plugin-proposal-class-properties", { "loose": true }],
+        ["@babel/plugin-transform-runtime", { "useESModules": false }]
+      ]
+    },
     "test": {
       "presets": [
         "@babel/preset-react",
