@@ -1,8 +1,6 @@
 import commonjs from 'rollup-plugin-commonjs';
 import filesize from 'rollup-plugin-filesize';
-import json from 'rollup-plugin-json';
 import resolve from 'rollup-plugin-node-resolve';
-import sourceMaps from 'rollup-plugin-sourcemaps';
 import { uglify } from 'rollup-plugin-uglify';
 import pkg from './package.json';
 import babel from 'rollup-plugin-babel';
@@ -24,11 +22,9 @@ const buildUMD = ({ isProduction = true }) => ({
     }
   },
   plugins: [
-    json(),
     babel({ exclude: 'node_modules/**' }),
     resolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
     commonjs(),
-    sourceMaps(),
     isProduction && filesize(),
     isProduction &&
       uglify({
