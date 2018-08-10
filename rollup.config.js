@@ -3,9 +3,9 @@ import filesize from 'rollup-plugin-filesize';
 import json from 'rollup-plugin-json';
 import resolve from 'rollup-plugin-node-resolve';
 import sourceMaps from 'rollup-plugin-sourcemaps';
-import typescript from 'rollup-plugin-typescript2';
 import { uglify } from 'rollup-plugin-uglify';
 import pkg from './package.json';
+import babel from 'rollup-plugin-babel';
 
 const input = 'src/index.ts';
 const external = ['react', 'formik'];
@@ -25,9 +25,9 @@ const buildUMD = ({ isProduction = true }) => ({
   },
   plugins: [
     json(),
-    typescript({ useTsconfigDeclarationDir: true }),
+    babel({ exclude: 'node_modules/**' }),
+    resolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
     commonjs(),
-    resolve(),
     sourceMaps(),
     isProduction && filesize(),
     isProduction &&
@@ -42,8 +42,8 @@ const buildUMD = ({ isProduction = true }) => ({
 });
 
 export default [
-  buildUMD({ isProduction: true }),
   buildUMD({ isProduction: false }),
+  buildUMD({ isProduction: true }),
   {
     input,
     external: external.concat(Object.keys(pkg.dependencies)),
@@ -60,10 +60,8 @@ export default [
       }
     ],
     plugins: [
-      json(),
-      typescript({ useTsconfigDeclarationDir: true }),
-      resolve(),
-      sourceMaps(),
+      resolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
+      babel({ exclude: 'node_modules/**' }),
       filesize()
     ]
   }
