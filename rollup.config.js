@@ -1,16 +1,26 @@
+import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import filesize from 'rollup-plugin-filesize';
 import resolve from 'rollup-plugin-node-resolve';
 import { uglify } from 'rollup-plugin-uglify';
+import { checkPeerDependenciesForUmdBuild } from './dev/checkPeerDependenciesForUmdBuild';
 import pkg from './package.json';
-import babel from 'rollup-plugin-babel';
 
 const input = 'src/index.ts';
 const external = ['react', 'formik'];
 
+const globals = {
+  react: 'React',
+  formik: 'Formik'
+};
+
+checkPeerDependenciesForUmdBuild(pkg.peerDependencies, external, globals);
+
+// in CJS/ES the dependencies will added via your bundler so it is not necessary to add them to your bunlde.
 const allExternals = external.concat(Object.keys(pkg.dependencies));
 
-const check = id =>
+// If we only specify the external array, imports from submodules (`import '[PACKAGE]/lib/module'`) are not detected and added to your bundle
+const checkIfModuleIsExternal = id =>
   allExternals.filter(ext => id.substr(0, ext.length) === ext).length > 0;
 
 const buildUMD = ({ isProduction = true }) => ({
@@ -21,10 +31,7 @@ const buildUMD = ({ isProduction = true }) => ({
     file: `dist/formik-fields.umd${isProduction ? '.min' : ''}.js`,
     format: 'umd',
     sourcemap: true,
-    globals: {
-      react: 'React',
-      formik: 'Formik'
-    }
+    globals
   },
   plugins: [
     babel({ exclude: 'node_modules/**', runtimeHelpers: true }),
@@ -44,7 +51,7 @@ const buildUMD = ({ isProduction = true }) => ({
 
 const buildBundle = ({ isCommonjs = false }) => ({
   input,
-  external: check,
+  external: checkIfModuleIsExternal,
   output: {
     file: isCommonjs ? pkg.main : pkg.module,
     format: isCommonjs ? 'cjs' : 'es',
