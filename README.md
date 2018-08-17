@@ -18,7 +18,7 @@ npm install formik formik-fields
 
 ## Example
 
-```typescript
+```tsx
 import * as React from 'react';
 import { FormikFields } from 'formik-fields';
 import { FormikFieldInput } from './your-custom-component';
@@ -49,8 +49,8 @@ export const MyForm = () => (
 );
 ```
 
-* [TypeScript-example on CodeSandbox](https://codesandbox.io/s/p2pzokv1mq)
-* [React-JSX example on CodeSandbox](https://codesandbox.io/s/2pjyoqoolr)
+- [TypeScript-example on CodeSandbox](https://codesandbox.io/s/p2pzokv1mq)
+- [React-JSX example on CodeSandbox](https://codesandbox.io/s/2pjyoqoolr)
 
 ## Table of Contents
 
@@ -76,7 +76,7 @@ The `<FormikFields>`-Component accepts following props:
 
 > Type: `{ [fieldName]: FieldDefinition }`
 
-```typescript
+```tsx
 const formikFieldDefinition = {
   name: {
     initialValue: '',
@@ -124,7 +124,7 @@ The second callback-parameter contains all props from [Formik's render-prop-call
 
 This project is written in TypeScript and so typings should always be up-to-date. You should always enhance the `<FormikFields>`-Component with your form-values-Interface (since [TypeScript 2.9](http://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-9.html#generic-type-arguments-in-jsx-elements) you can do this inline):
 
-```typescript
+```tsx
 interface MyFormValues {
   email: string;
   name: string;
@@ -145,7 +145,7 @@ You can use FormikFields as well as formik without TypeScript (via ES6-`import` 
 
 A minimum implementation of a `FormikFieldInput` in TypeScript could look like this:
 
-```typescript
+```tsx
 import { PureComponent } from 'react';
 import { FormikFieldState } from 'formik-fields';
 
