@@ -19,7 +19,7 @@
   ],
   "main": "dist/formik-fields.cjs.js",
   "module": "dist/formik-fields.esm.js",
-  "typings": "dist/types/formik-fields.d.ts",
+  "typings": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
