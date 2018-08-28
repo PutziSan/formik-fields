@@ -61,16 +61,15 @@ const buildBundle = ({ isCommonjs = false }) => ({
     resolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
     babel({
       exclude: 'node_modules/**',
-      runtimeHelpers: true,
-      envName: isCommonjs ? 'commonjs' : process.env.NODE_ENV
+      runtimeHelpers: true
     }),
     filesize()
   ]
 });
 
 export default [
-  buildUMD({ isProduction: false }),
-  buildUMD({ isProduction: true }),
+  // buildUMD({ isProduction: false }),
+  // buildUMD({ isProduction: true }),
   buildBundle({ isCommonjs: true }),
   buildBundle({ isCommonjs: false })
 ];
