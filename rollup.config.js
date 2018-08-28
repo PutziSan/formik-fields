@@ -34,8 +34,12 @@ const buildUMD = ({ isProduction = true }) => ({
     globals
   },
   plugins: [
-    babel({ exclude: 'node_modules/**', runtimeHelpers: true }),
     resolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
+    babel({
+      exclude: 'node_modules/**',
+      runtimeHelpers: true,
+      extensions: ['.ts', '.tsx', '.js', '.jsx']
+    }),
     commonjs(),
     isProduction && filesize(),
     isProduction &&
@@ -62,7 +66,8 @@ const buildBundle = ({ isCommonjs = false }) => ({
     babel({
       exclude: 'node_modules/**',
       runtimeHelpers: true,
-      envName: isCommonjs ? 'commonjs' : process.env.NODE_ENV
+      envName: isCommonjs ? 'commonjs' : process.env.NODE_ENV,
+      extensions: ['.ts', '.tsx', '.js', '.jsx']
     }),
     filesize()
   ]
