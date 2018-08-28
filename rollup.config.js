@@ -8,13 +8,12 @@ import pkg from './package.json';
 
 const input = 'src/index.ts';
 const external = ['react', 'formik'];
+const extensions = ['.ts', '.tsx', '.js', '.jsx'];
 
 const globals = {
   react: 'React',
   formik: 'Formik'
 };
-
-const extensions = ['.ts', '.tsx', '.js', '.jsx'];
 
 checkPeerDependenciesForUmdBuild(pkg.peerDependencies, external, globals);
 
