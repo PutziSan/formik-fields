@@ -68,8 +68,8 @@ const buildBundle = ({ isCommonjs = false }) => ({
 });
 
 export default [
-  // buildUMD({ isProduction: false }),
-  // buildUMD({ isProduction: true }),
+  buildUMD({ isProduction: false }),
+  buildUMD({ isProduction: true }),
   buildBundle({ isCommonjs: true }),
   buildBundle({ isCommonjs: false })
 ];
