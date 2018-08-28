@@ -14,6 +14,8 @@ const globals = {
   formik: 'Formik'
 };
 
+const extensions = ['.ts', '.tsx', '.js', '.jsx'];
+
 checkPeerDependenciesForUmdBuild(pkg.peerDependencies, external, globals);
 
 // in CJS/ES the dependencies will added via your bundler so it is not necessary to add them to your bunlde.
@@ -34,12 +36,8 @@ const buildUMD = ({ isProduction = true }) => ({
     globals
   },
   plugins: [
-    resolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
-    babel({
-      exclude: 'node_modules/**',
-      runtimeHelpers: true,
-      extensions: ['.ts', '.tsx', '.js', '.jsx']
-    }),
+    resolve({ extensions }),
+    babel({ exclude: 'node_modules/**', runtimeHelpers: true, extensions }),
     commonjs(),
     isProduction && filesize(),
     isProduction &&
@@ -62,12 +60,12 @@ const buildBundle = ({ isCommonjs = false }) => ({
     sourcemap: true
   },
   plugins: [
-    resolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
+    resolve({ extensions }),
     babel({
       exclude: 'node_modules/**',
       runtimeHelpers: true,
       envName: isCommonjs ? 'commonjs' : process.env.NODE_ENV,
-      extensions: ['.ts', '.tsx', '.js', '.jsx']
+      extensions
     }),
     filesize()
   ]
