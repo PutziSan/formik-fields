@@ -61,7 +61,8 @@ const buildBundle = ({ isCommonjs = false }) => ({
     resolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
     babel({
       exclude: 'node_modules/**',
-      runtimeHelpers: true
+      runtimeHelpers: true,
+      envName: isCommonjs ? 'commonjs' : process.env.NODE_ENV
     }),
     filesize()
   ]
