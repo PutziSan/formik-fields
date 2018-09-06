@@ -12,6 +12,7 @@
     "no-object-literal-type-assertion": false,
     "no-multiline-string": false,
     "array-type": false,
+    "only-arrow-functions": false,
     "no-any": {
       "severity": "warning"
     }
