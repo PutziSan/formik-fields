@@ -25,7 +25,7 @@
   ],
   "scripts": {
     "build": "rimraf dist && yarn build:declarations && cross-env NODE_ENV=production rollup -c rollup.config.js",
-    "build:declarations": "tsc --declarationDir dist/types --declaration --emitDeclarationOnly --allowJs false",
+    "build:declarations": "tsc -p ./dev/tsconfig.declarations.json  --declarationDir dist/types --declaration --emitDeclarationOnly --allowJs false",
     "test": "cross-env NODE_ENV=test jest"
   },
   "peerDependencies": {

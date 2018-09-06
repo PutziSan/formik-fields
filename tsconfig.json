@@ -17,6 +17,5 @@
     "noImplicitReturns": true,
     "noImplicitAny": true
   },
-  "include": ["src/**/*"],
   "exclude": [".git", "node_modules"]
 }
