@@ -1,4 +1,4 @@
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { Formik, FormikProps } from 'formik';
 import * as React from 'react';
 import {
@@ -15,17 +15,17 @@ interface TestValues {
 const ERROR_TEST_VAL = 'ERROR_TEST_VAL';
 
 const defaultFieldsDef: FormikFieldsDefinition<TestValues> = {
+  email: {
+    initialValue: 'test'
+  },
   name: {
     initialValue: 'not',
     validate: val => !val && ERROR_TEST_VAL
-  },
-  email: {
-    initialValue: 'test'
   }
 };
 
 const getTestComponent = (fieldsDefinition = defaultFieldsDef) => {
-  const renderMock = jest.fn();
+  const renderMock = jest.fn().mockReturnValue('');
   const submitMock = jest.fn();
   const component = (
     <FormikFields<TestValues>
@@ -48,7 +48,7 @@ describe('when FormikFields renders', () => {
   it('should pass the submit-handler correctly', () => {
     const { submitMock, component } = getTestComponent();
 
-    const rendered = shallow(component); // .dive cause internally Formik with its render-prop is used
+    const rendered = mount(component); // .dive cause internally Formik with its render-prop is used
 
     expect(rendered.find(Formik).prop('onSubmit')).toBe(submitMock);
   });
@@ -56,7 +56,7 @@ describe('when FormikFields renders', () => {
   it('should call the render-fn', () => {
     const { renderMock, component } = getTestComponent();
 
-    shallow(component).dive(); // .dive cause internally Formik with its render-prop is used
+    mount(component); // .dive cause internally Formik with its render-prop is used
 
     expect(renderMock).toHaveBeenCalledTimes(1);
   });
@@ -64,7 +64,7 @@ describe('when FormikFields renders', () => {
   it('should should propagate the initialValue correctly', () => {
     const { renderMock, component } = getTestComponent();
 
-    shallow(component).dive(); // .dive cause internally Formik with its render-prop is used
+    mount(component); // .dive cause internally Formik with its render-prop is used
 
     const formikFieldState = renderMock.mock.calls[0][0] as FormikFieldsState<
       TestValues
@@ -79,7 +79,7 @@ describe('when FormikFields renders', () => {
   it('should should propagate the initialValue correctly', () => {
     const { renderMock, component } = getTestComponent();
 
-    shallow(component).dive(); // .dive cause internally Formik with its render-prop is used
+    mount(component); // .dive cause internally Formik with its render-prop is used
 
     const formikFieldState = renderMock.mock.calls[0][0] as FormikFieldsState<
       TestValues
@@ -94,7 +94,7 @@ describe('when FormikFields renders', () => {
   it('should set an error if an value is invalid', () => {
     const { renderMock, component } = getTestComponent();
 
-    shallow(component).dive(); // .dive cause internally Formik with its render-prop is used
+    mount(component); // .dive cause internally Formik with its render-prop is used
 
     const formikFieldState = renderMock.mock.calls[0][0] as FormikFieldsState<
       TestValues
@@ -115,7 +115,7 @@ describe('when FormikFields renders', () => {
   it('should mutate only changed fields', () => {
     const { renderMock, component } = getTestComponent();
 
-    shallow(component).dive(); // .dive cause internally Formik with its render-prop is used
+    mount(component); // .dive cause internally Formik with its render-prop is used
 
     const formikFieldState = renderMock.mock.calls[0][0] as FormikFieldsState<
       TestValues
@@ -132,5 +132,30 @@ describe('when FormikFields renders', () => {
     expect(
       renderMock.mock.calls[renderMock.mock.calls.length - 1][0].email
     ).toBe(formikFieldState.email);
+  });
+
+  it('should call render only one time on initial mount', function() {
+    const { renderMock, component } = getTestComponent();
+
+    mount(component);
+
+    expect(renderMock.mock.calls).toHaveLength(1);
+  });
+
+  it('should only rerender one time', () => {
+    const { renderMock, component } = getTestComponent();
+
+    mount(component); // .dive cause internally Formik with its render-prop is used
+
+    const formikFieldState = renderMock.mock.calls[0][0] as FormikFieldsState<
+      TestValues
+    >;
+
+    formikFieldState.name.setValue(
+      `${formikFieldState.name.value}_CHANGED`,
+      true
+    );
+
+    expect(renderMock.mock.calls).toHaveLength(2);
   });
 });

@@ -11,6 +11,7 @@
     "member-access": false,
     "no-object-literal-type-assertion": false,
     "no-multiline-string": false,
+    "array-type": false,
     "no-any": {
       "severity": "warning"
     }

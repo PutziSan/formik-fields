@@ -6,6 +6,8 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 export type fieldKeys<Values> = (keyof Values & string)[];
 
+export type CFormikProps<Values> = Omit<FormikProps<Values>, 'isValidating'>;
+
 export interface FormikFieldState<Value> {
   name: string;
   value: Value;
@@ -32,7 +34,7 @@ export type FormikFieldsDefinition<Values> = {
 
 export type FormikRenderType<Values> = (
   props: FormikFieldsState<Values>,
-  formikBag: FormikProps<Values>
+  formikBag: CFormikProps<Values>
 ) => React.ReactNode;
 
 export interface FormikFieldsConfig<Values>

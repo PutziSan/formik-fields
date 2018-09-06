@@ -9,6 +9,7 @@ import {
   getFieldKeys,
   ValidatorMap
 } from './formikToFormikFields';
+import { RenderPureFormikFields } from './RenderPureFormikFields';
 import { FormikFieldsConfig, FormikFieldsState } from './types';
 import { withoutFalsies } from './utilities';
 
@@ -81,16 +82,15 @@ export class FormikFields<Values> extends React.PureComponent<
   };
 
   renderCustomFieldsForm = (formikBag: FormikProps<Values>) => {
-    if (this.props.render) {
-      return this.props.render(this.getState(formikBag), formikBag);
-    }
+    const { isValidating, ...other } = formikBag;
 
-    if (this.props.children) {
-      return this.props.children(this.getState(formikBag), formikBag);
-    }
-
-    throw new Error(
-      'you have to provide either the children- or the render-prop'
+    return (
+      <RenderPureFormikFields
+        {...other}
+        render={this.props.render}
+        children={this.props.children}
+        formikFields={this.getState(formikBag)}
+      />
     );
   };
 
