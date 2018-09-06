@@ -2,7 +2,7 @@
   "name": "formik-fields",
   "sideEffects": false,
   "description": "An extension to the great formik-library",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "license": "MIT",
   "author": "Putzi San <putzisan@putzisan.de>",
   "repository": "PutziSan/formik-fields",
